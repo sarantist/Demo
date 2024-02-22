@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.example.demo.data.FirebaseRepository
 import com.example.demo.data.Response
 import com.example.demo.model.Element
+import com.example.demo.model.ElementType
 import com.example.demo.ui.theme.DemoTheme
 import com.example.demo.ui.theme.Spacing
 import com.example.demo.util.GsonProvider
@@ -104,7 +105,7 @@ fun ElementFactory(element: Element) {
 @Composable
 fun TextElement(element: Element.TextElement) {
     when (element.purpose) {
-        "title" -> {
+        ElementType.TextType.TITLE.value -> {
             Text(
                 text = element.text,
                 style = MaterialTheme.typography.h3,
@@ -112,7 +113,7 @@ fun TextElement(element: Element.TextElement) {
                 overflow = TextOverflow.Ellipsis
             )
         }
-        "description" -> {
+        ElementType.TextType.DESCRIPTION.value -> {
             Text(
                 text = element.text,
                 style = MaterialTheme.typography.body1,
