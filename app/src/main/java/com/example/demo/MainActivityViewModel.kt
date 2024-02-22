@@ -13,7 +13,6 @@ class MainActivityViewModel(val repository: FirebaseRepository) : ViewModel() {
     var state: MutableState<DataState<Response>> = mutableStateOf(DataState.Loading)
         private set
 
-
     init {
         getData()
     }
@@ -21,7 +20,7 @@ class MainActivityViewModel(val repository: FirebaseRepository) : ViewModel() {
     private fun getData() = viewModelScope.launch {
         try {
             repository.getData().collect { response ->
-               state.value = DataState.Success(response)
+                state.value = DataState.Success(response)
             }
         } catch (e: Exception) {
             state.value = DataState.Error(e)
