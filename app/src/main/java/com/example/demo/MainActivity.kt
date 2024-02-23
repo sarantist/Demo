@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.demo.data.FirebaseRepository
@@ -39,16 +41,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainComposable(viewModel: MainActivityViewModel) {
-    val dataState = viewModel.state.value
-    when (dataState) {
-        is DataState.Error -> {
-            ErrorText(dataState.exception)
+    // Collect the StateFlow as state
+    val uiState: UiState<Response> by viewModel.state.collectAsState()
+    when (val state = uiState) {
+        is UiState.Error -> {
+            ErrorText(state.exception)
         }
-        DataState.Loading -> {
+        UiState.Loading -> {
             LinearProgressIndicator()
         }
-        is DataState.Success -> {
-            ArticleList(dataState.data)
+        is UiState.Success -> {
+            ArticleList(state.data)
         }
     }
 }

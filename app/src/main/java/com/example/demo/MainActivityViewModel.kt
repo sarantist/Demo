@@ -1,37 +1,40 @@
 package com.example.demo
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demo.data.FirebaseRepository
 import com.example.demo.data.Response
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 
 class MainActivityViewModel(val repository: FirebaseRepository) : ViewModel() {
-    var state: MutableState<DataState<Response>> = mutableStateOf(DataState.Loading)
-        private set
+    // Create a StateFlow with an initial value of DataState.Loading
+    private val _state = MutableStateFlow<UiState<Response>>(UiState.Loading)
+    val state: StateFlow<UiState<Response>> = _state
 
     init {
         getData()
     }
 
-    private fun getData() = viewModelScope.launch {
-        try {
-            repository.getData().collect { response ->
-                state.value = DataState.Success(response)
+    private fun getData() {
+        viewModelScope.launch {
+            try {
+                repository.getData().collect { response ->
+                    _state.value = UiState.Success(response)
+                }
+            } catch (e: Exception) {
+                _state.value = UiState.Error(e)
             }
-        } catch (e: Exception) {
-            state.value = DataState.Error(e)
         }
     }
 }
 
-sealed class DataState<out T> {
-    object Loading : DataState<Nothing>()
-    data class Success<out T>(val data: T) : DataState<T>()
-    data class Error(val exception: Exception) : DataState<Nothing>()
+sealed class UiState<out T> {
+    object Loading : UiState<Nothing>()
+    data class Success<out T>(val data: T) : UiState<T>()
+    data class Error(val exception: Exception) : UiState<Nothing>()
 }
 
 
