@@ -78,11 +78,11 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
 
     // Moshi parser
-    implementation "com.squareup.moshi:moshi:1.11.0"
-    implementation "com.squareup.moshi:moshi-kotlin:1.11.0"
-    implementation "com.squareup.moshi:moshi-adapters:1.11.0"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    implementation "com.squareup.moshi:moshi-adapters:$moshi_version"
 
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "com.google.code.gson:gson:$gson_version"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
