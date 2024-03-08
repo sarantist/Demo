@@ -21,9 +21,10 @@ object FirebaseModule {
     @Provides
     fun provideRepository(
         gson: Gson,
-        moshi: Moshi
+        moshi: Moshi,
+        databaseReference: DatabaseReference
     ): Repository {
-        return FirebaseRepositoryImpl(gson, moshi)
+        return FirebaseRepositoryImpl(gson, moshi, databaseReference)
     }
 
     @Provides

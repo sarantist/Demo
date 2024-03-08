@@ -1,6 +1,5 @@
 package com.example.demo.data
 
-import com.google.firebase.Firebase
 import com.google.firebase.database.*
 import com.google.gson.Gson
 import com.squareup.moshi.Moshi
@@ -11,9 +10,9 @@ import javax.inject.Inject
 
 class FirebaseRepositoryImpl @Inject constructor(
     private val gson: Gson,
-    private val moshi: Moshi
+    private val moshi: Moshi,
+    private val databaseReference: DatabaseReference
 ) : Repository {
-    private val databaseReference: DatabaseReference = Firebase.database.reference
 
     override suspend fun getData(): Flow<Response> = callbackFlow {
         val listener = object : ValueEventListener {
