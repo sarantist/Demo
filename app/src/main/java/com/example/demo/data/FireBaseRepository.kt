@@ -9,14 +9,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 
-interface Repository {
-    fun getData(): Flow<Response>
-}
-
-class FirebaseRepository(val gson: Gson, val moshi: Moshi) : Repository {
+class FirebaseRepositoryImpl(val gson: Gson, val moshi: Moshi) : Repository {
     private val databaseReference: DatabaseReference = Firebase.database.reference
 
-    override fun getData(): Flow<Response> = callbackFlow {
+    override suspend fun getData(): Flow<Response> = callbackFlow {
         val listener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // get the firebase data as json

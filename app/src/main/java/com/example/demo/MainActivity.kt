@@ -12,7 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import com.example.demo.data.FirebaseRepository
+import com.example.demo.data.FirebaseRepositoryImpl
 import com.example.demo.data.Response
 import com.example.demo.model.Element
 import com.example.demo.model.ElementType
@@ -22,8 +22,8 @@ import com.example.demo.util.GsonProvider
 import com.example.demo.util.MoshiProvider
 
 class MainActivity : ComponentActivity() {
-    private val firebaseRepository = FirebaseRepository(GsonProvider.gson, MoshiProvider.moshi)
-    private val viewModel = MainActivityViewModel(repository = firebaseRepository)
+    private val firebaseRepositoryImpl = FirebaseRepositoryImpl(GsonProvider.gson, MoshiProvider.moshi)
+    private val viewModel = MainActivityViewModel(repository = firebaseRepositoryImpl)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
