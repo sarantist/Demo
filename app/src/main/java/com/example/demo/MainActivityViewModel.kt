@@ -2,15 +2,16 @@ package com.example.demo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.demo.data.FirebaseRepositoryImpl
 import com.example.demo.data.Repository
 import com.example.demo.data.Response
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class MainActivityViewModel(val repository: Repository) : ViewModel() {
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     // Create a StateFlow with an initial value of DataState.Loading
     private val _state = MutableStateFlow<UiState<Response>>(UiState.Loading)
     val state: StateFlow<UiState<Response>> = _state

@@ -3,6 +3,7 @@ package com.example.demo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,12 +19,13 @@ import com.example.demo.model.Element
 import com.example.demo.model.ElementType
 import com.example.demo.ui.theme.DemoTheme
 import com.example.demo.ui.theme.Spacing
-import com.example.demo.util.GsonProvider
-import com.example.demo.util.MoshiProvider
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val firebaseRepositoryImpl = FirebaseRepositoryImpl(GsonProvider.gson, MoshiProvider.moshi)
-    private val viewModel = MainActivityViewModel(repository = firebaseRepositoryImpl)
+
+    private val viewModel: MainActivityViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

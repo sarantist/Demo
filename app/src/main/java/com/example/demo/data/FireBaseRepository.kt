@@ -7,9 +7,12 @@ import com.squareup.moshi.Moshi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import javax.inject.Inject
 
-
-class FirebaseRepositoryImpl(val gson: Gson, val moshi: Moshi) : Repository {
+class FirebaseRepositoryImpl @Inject constructor(
+    private val gson: Gson,
+    private val moshi: Moshi
+) : Repository {
     private val databaseReference: DatabaseReference = Firebase.database.reference
 
     override suspend fun getData(): Flow<Response> = callbackFlow {
