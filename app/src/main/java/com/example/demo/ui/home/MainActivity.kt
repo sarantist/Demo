@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.ui.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import com.example.demo.data.FirebaseRepositoryImpl
 import com.example.demo.data.Response
 import com.example.demo.model.Element
 import com.example.demo.model.ElementType
