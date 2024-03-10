@@ -1,7 +1,5 @@
 package com.example.demo.di
 
-import com.example.demo.data.FirebaseRepositoryImpl
-import com.example.demo.data.Repository
 import com.example.demo.util.MoshiBuilder
 import com.google.firebase.Firebase
 import com.google.firebase.database.*
@@ -17,15 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object FirebaseModule {
-
-    @Provides
-    fun provideRepository(
-        gson: Gson,
-        moshi: Moshi,
-        databaseReference: DatabaseReference
-    ): Repository {
-        return FirebaseRepositoryImpl(gson, moshi, databaseReference)
-    }
 
     @Provides
     @Singleton
