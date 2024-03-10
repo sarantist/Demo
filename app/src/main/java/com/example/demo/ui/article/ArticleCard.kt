@@ -7,8 +7,8 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.demo.model.Element
-import com.example.demo.ui.home.ElementFactory
 import com.example.demo.ui.theme.Spacing
+import com.example.demo.util.ElementFactory
 
 @Composable
 fun ArticleCard(elements: List<Element>) {
